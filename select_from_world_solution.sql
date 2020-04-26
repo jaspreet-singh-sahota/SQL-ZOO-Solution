@@ -1,95 +1,88 @@
--- SELECT names Tutorial
+-- SELECT from WORLD Tutorial
 
 -- Question 1
-SELECT name
+SELECT name, continent, population
 FROM world
-WHERE name
-LIKE 'Y%'
 
 -- Question 2
 SELECT name
 FROM world
-WHERE name
-LIKE '%Y'
+WHERE population >= 200000000
 
 -- Question 3
-SELECT name
+SELECT name,
+       (gdp/population) AS per_capita_GDP
 FROM world
-WHERE name
-LIKE '%x%'
+WHERE population >= 200000000
 
 -- Question 4
-SELECT name
+SELECT name,
+       population/1000000 AS pop_in_millions
 FROM world
-WHERE name
-LIKE '%land'
+WHERE continent = 'South America'
 
 -- Question 5
-SELECT name
+SELECT name, population
 FROM world
 WHERE name
-LIKE 'C%'
-AND name
-LIKE '%ia'
+IN ('Germany', 'France', 'Italy')
 
 -- Question 6
 SELECT name
 FROM world
 WHERE name
-LIKE '%oo%'
+LIKE '%united%'
 
 -- Question 7
-SELECT name
+SELECT name, population, area
 FROM world
-WHERE name
-LIKE '%a%a%a%'
+WHERE area > 3000000
+OR population > 250000000
 
 -- Question 8
-SELECT name
+SELECT name, population, area
 FROM world
-WHERE name
-LIKE '_t%'
-ORDER BY name
+WHERE (area < 3000000 AND population > 250000000)
+OR (area > 3000000 AND population < 250000000)
 
 -- Question 9
-SELECT name
+SELECT name,
+       ROUND(population/1000000, 2) AS population, ROUND(gdp/1000000000, 2) AS GDP
 FROM world
-WHERE name
-LIKE '%o__o%'
+WHERE continent = 'South America'
 
 -- Question 10
-SELECT name
+SELECT name,
+       ROUND(gdp/population, -3) AS per_capita_GDP
 FROM world
-WHERE name
-LIKE '____'
+WHERE gdp >= 1000000000000
 
--- EXTRA (Difficult)
 -- Question 11
-SELECT name
+SELECT name, capital
 FROM world
-WHERE name = capital
+WHERE LENGTH(name) = LENGTH(capital)
 
 -- Question 12
-SELECT name
+SELECT name, capital
 FROM world
-WHERE capital
-LIKE '%city'
+WHERE LEFT(name, 1) = LEFT(capital, 1)
+AND name <> capital
 
 -- Question 13
-SELECT capital, name
+SELECT name
 FROM world
-WHERE capital
-LIKE CONCAT('%', name, '%')
+WHERE name LIKE '%a%'
+AND name LIKE '%e%'
+AND name LIKE '%i%'
+AND name LIKE '%o%'
+AND name LIKE '%u%'
+AND name NOT LIKE '% %'
 
--- Question 14
-SELECT capital, name
-FROM world
-WHERE capital
-LIKE CONCAT(name, '_%')
-
--- Question 15
-SELECT name,
-       REPLACE(capital, name, '') AS ext
-FROM world
-WHERE capital
-LIKE CONCAT(name, '_%')
+-- QUIZ
+1. E
+2. D
+3. B
+4. D
+5. B
+6. D
+7. C
